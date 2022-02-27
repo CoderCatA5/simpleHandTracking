@@ -7,6 +7,7 @@ cap = cv2.VideoCapture(0)
 mpHand=mp.solutions.hands
 
 #static image_mode false
+#second parameter for no of hands
 hands=mpHand.Hands(False,2)
 mpDraw=mp.solutions.drawing_utils
 
@@ -29,8 +30,12 @@ while True:
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
             for id,lm in enumerate(handLms.landmark):
-                print(id,lm)
-                # gives x y z values of markers
+                #print(id,lm)
+                # gives x y z values of markers in terms of percentage
+                h,w,c=img.shape
+                cx,cy=int(lm.x*w),int(lm.y*h);
+                
+                print(id,cx,cy)
             
             #draw landmarks over images 
             #mpDraw.draw_landmarks(img,handLms)
