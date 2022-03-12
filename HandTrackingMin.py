@@ -1,6 +1,7 @@
+import time
+
 import cv2
 import mediapipe as mp
-import time
 
 cap = cv2.VideoCapture(0)
 
@@ -8,7 +9,7 @@ mpHand=mp.solutions.hands
 
 #static image_mode false
 #second parameter for no of hands
-hands=mpHand.Hands(False,2)
+hands=mpHand.Hands(False,4)
 mpDraw=mp.solutions.drawing_utils
 
 
@@ -33,9 +34,12 @@ while True:
                 #print(id,lm)
                 # gives x y z values of markers in terms of percentage
                 h,w,c=img.shape
+    conda install -c conda-forge pyautogui
                 cx,cy=int(lm.x*w),int(lm.y*h);
                 
                 print(id,cx,cy)
+                if id==4:
+                    cv2.circle(img,(cx,cy),10,(255,0,255),cv2.FILLED);
             
             #draw landmarks over images 
             #mpDraw.draw_landmarks(img,handLms)
